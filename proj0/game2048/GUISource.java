@@ -34,21 +34,14 @@ class GUISource implements InputSource {
     /** Return and log which direction arrow was pressed. */
     public String getKey() {
         String command = _source.readKey();
-        switch (command) {
-            case "↑" :
-                command = "Up";
-                break;
-            case "→" :
-                command = "Right";
-                break;
-            case "↓" :
-                command = "Down";
-                break;
-            case "←" :
-                command = "Left";
-                break;
-            default :
-                break;
+        if (command.equals("↑")) {
+            command = "Up";
+        } else if (command.equals("→")) {
+            command = "Right";
+        } else if (command.equals("↓")) {
+            command = "Down";
+        } else if (command.equals("←")) {
+            command = "Left";
         }
 
         String logLine = String.format("K %s%n", command);
@@ -66,7 +59,7 @@ class GUISource implements InputSource {
     }
 
     @Override
-     /** Return a randomly positioned tile with either value of 2 with 
+     /** Return a randomly positioned tile with either value of 2 with
       * probability _probOf2 or a value of 4 with probability 1 - _probOf2 in a
       * board with size SIZE. */
     public Tile getNewTile(int size) {
